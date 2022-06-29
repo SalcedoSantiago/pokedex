@@ -4,15 +4,12 @@ import { getStatType, getStatColor } from '../selectors'
 
 const Stats = ({ info }) => {
 
-
-
-
     return (
         <Box py={3} px={4}>
             <Text textAlign={'center'} fontWeight={600} mb={3}>Stats</Text>
             <Flex gap={1} justifyContent='space-between'>
                 {info.map(({ stat, base_stat }) =>
-                    <Box>
+                    <Box key={stat.name}>
                         <Box
                             rounded="full"
                             bgColor={getStatColor(stat.name)}
@@ -26,7 +23,6 @@ const Stats = ({ info }) => {
                         </Box>
                         <Text textAlign={'center'}>{base_stat}</Text>
                     </Box>
-
                 )
                 }
             </Flex>

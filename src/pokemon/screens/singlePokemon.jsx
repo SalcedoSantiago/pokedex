@@ -4,6 +4,7 @@ import { useFetch, usePokedex } from '../../pokedex/hooks'
 import { Box, Text, Heading, Stack, Skeleton, Flex, Stat } from '@chakra-ui/react';
 import Abilities from '../components/Abilities';
 import Stats from '../components/Stats';
+import Evolutions from '../components/Evolutions';
 
 
 
@@ -17,9 +18,6 @@ const SinglePokemon = () => {
             useFetch(URL).then((data) => setPokemon(data));
         }
     }, [singlePokemon])
-
-    console.log('singlePokemon', singlePokemon);
-    console.log('pokemon', pokemon);
 
     if (!singlePokemon) {
         return (
@@ -55,6 +53,7 @@ const SinglePokemon = () => {
                 </Box>
             </Box>
             <Stats info={singlePokemon.stats} />
+            {/* <Evolutions id={singlePokemon.id} /> */}
         </Box>
     )
 }

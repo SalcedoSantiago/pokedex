@@ -7,8 +7,8 @@ const GridList = ({ items }) => {
 
     return (
         <Grid gap={6} templateColumns="repeat(auto-fill, minmax(200px, 1fr))" width="100%">
-            {items.map((item, index) =>
-                <GridItemList key={index} data={item} />
+            {items.map((item) =>
+                <GridItemList key={item.name} data={item} />
             )}
         </Grid>
     )

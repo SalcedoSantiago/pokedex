@@ -2,7 +2,6 @@ import { Box, Heading, Text, Flex } from '@chakra-ui/react';
 
 const Abilities = ({ abilities }) => {
 
-    console.log('abilities', abilities);
 
     return (
         <Box textAlign={'center'} pt={2}>

@@ -5,6 +5,9 @@ export default extendTheme({
     color: {
         primary: theme.colors.orange
     },
+    fonts: {
+        body: `'Poppins', sans-serif`,
+    },
     styles: {
         global: {
             body: {

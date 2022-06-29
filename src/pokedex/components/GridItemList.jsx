@@ -9,16 +9,7 @@ const GridItemList = ({ data }) => {
     const { url, name } = data;
 
     useEffect(() => {
-        useFetch(url).then((data) => {
-            const urlImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.order - 1}.png`;
-            useFetchImage(urlImage).then(image => {
-                setCurrentPokemon({
-                    ...data,
-                    image: image
-                })
-            })
-        }
-        )
+        useFetch(url).then((data) => setCurrentPokemon(data))
     }, [])
 
 

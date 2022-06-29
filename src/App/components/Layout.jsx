@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
     return (
         <ChakraProvider theme={theme}>
             <Stack direction="column" flex={1} height="100vh" spacing={6}>
-                <Box w={'full'} borderBottom={'1px solid #ddd'} paddingY={4}>
+                <Box w={'full'} shadow="md" paddingY={4}>
                     <Container maxW={"6xl"}>
                         <Stack direction={'row'} justify="space-between" align={'center'}>
                             <Box>

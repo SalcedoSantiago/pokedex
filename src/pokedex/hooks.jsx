@@ -7,6 +7,7 @@ export const usePokedex = () => {
     const {
         state: {
             pokemonGroup,
+            Pokemones,
             singlePokemon
         },
         actions: {
@@ -19,6 +20,23 @@ export const usePokedex = () => {
         pokemonGroup,
         singlePokemon,
         setSinglePokemon,
+        Pokemones,
+    }
+}
+
+export const useFilter = () => {
+    const {
+        state: {
+            count
+        },
+        actions: {
+            setCount
+        }
+    } = useContext(PokedexContext)
+
+    return {
+        count,
+        setCount
     }
 }
 

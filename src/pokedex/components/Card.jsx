@@ -1,4 +1,4 @@
-import { Stack, Text, Heading, Image, useColorModeValue, } from '@chakra-ui/react';
+import { Stack, Text, Heading, Image, useColorModeValue, Skeleton } from '@chakra-ui/react';
 import Badget from '../../pokemon/components/badget';
 
 const Card = ({ currentPokemon }) => {
@@ -10,19 +10,32 @@ const Card = ({ currentPokemon }) => {
             color={useColorModeValue('gray.800', 'white')}
             align={'center'}
         >
-            <Image
-                src={currentPokemon?.image ? currentPokemon.image : 'https://via.placeholder.com/150'}
-            />
+            <Stack>
+                <Skeleton height='100px' isLoaded={currentPokemon?.sprites?.front_default} fadeDuration={1}>
+                    <Image
+                        h={'100px'}
+                        src={currentPokemon?.sprites?.front_default ? currentPokemon.sprites.front_default : 'https://via.placeholder.com/150'}
+                    />
+                </Skeleton>
+            </Stack>
+
             <Text
                 fontSize={'sm'}
-                fontWeight={500}
-                p={2}
+                fontWeight={600}
+                py={0}
                 px={3}
-                rounded={'full'}>
+                mt={0}
+                lineHeight={0}
+                rounded={'full'}
+                color="gray.500"
+            >
                 N°{currentPokemon?.order}
             </Text>
             <Heading
-                fontSize={'x'}
+                py={3}
+                fontSize={'large'}
+                color="blue.900"
+                textTransform={'capitalize'}
             >
                 {currentPokemon?.name}
             </Heading>

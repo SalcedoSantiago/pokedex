@@ -1,27 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 
 import { Flex, Spinner, Center } from '@chakra-ui/react';
 
 const PokedexContext = createContext({});
 
 function PokedexProvider({ children }) {
-    const [pokemonGroup, setPokemonGroup] = useState();
+    const [pokemonGroup, setPokemonGroup] = useState([]);
     const [singlePokemon, setSinglePokemon] = useState();
     const [loaded, setLoaded] = useState(false);
+    const [count, setCount] = useState(20);
+    const Pokemones = useMemo(() => Boolean(pokemonGroup?.length) ? pokemonGroup.slice(0, count) : [], [pokemonGroup, count])
 
     useEffect(() => {
-        // const responseData = JSON.parse(window.localStorage.getItem("pokemon"));
-        // if (Boolean(responseData?.length)) {
-        //     setPokemonGroup(responseData);
-        // } else {
-        fetch(
-            "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20")
-            .then((res) => res.json()).then((response) => {
-                const pokeData = response.results.slice(1, 20);
-                setPokemonGroup(pokeData);
-                // window.localStorage.setItem("pokemon", JSON.stringify(pokeData));
-            })
-        // }
+        const responseData = JSON.parse(window.localStorage.getItem("pokemon"));
+        if (Boolean(responseData?.length)) {
+            setPokemonGroup(responseData);
+        } else {
+            fetch(
+                "https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000")
+                .then((res) => res.json()).then((response) => {
+                    const pokeData = response.results;
+                    setPokemonGroup(pokeData);
+                    window.localStorage.setItem("pokemon", JSON.stringify(pokeData));
+                })
+        }
         setTimeout(() => {
             setLoaded(true)
         }, 1500)
@@ -30,10 +32,13 @@ function PokedexProvider({ children }) {
     const value = {
         state: {
             pokemonGroup,
-            singlePokemon
+            Pokemones,
+            singlePokemon,
+            count
         },
         actions: {
-            setSinglePokemon
+            setSinglePokemon,
+            setCount
         }
     }
 

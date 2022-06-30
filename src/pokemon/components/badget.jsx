@@ -7,13 +7,14 @@ const Badget = ({ type }) => {
     return (
         <Text
             fontSize={'sm'}
-            fontWeight={500}
+            fontWeight={400}
             bg={getColor(type)}
             p={1}
             px={3}
             color={'white'}
-            rounded={5}>
-            {type}
+            rounded={5}
+            >
+            {type.toUpperCase()}
         </Text>
     )
 }

@@ -1,7 +1,16 @@
+import { useState, useEffect } from 'react';
 import { Stack, Text, Heading, Image, useColorModeValue, Skeleton } from '@chakra-ui/react';
 import Badget from '../../pokemon/components/badget';
-
+import { debounce } from 'lodash';
 const Card = ({ currentPokemon }) => {
+    const [loaded, setLoaded] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoaded(true)
+        }, 1000)
+    }, [])
+
 
     return (
         <Stack
@@ -11,14 +20,13 @@ const Card = ({ currentPokemon }) => {
             align={'center'}
         >
             <Stack>
-                <Skeleton height='100px' isLoaded={currentPokemon?.sprites?.front_default} fadeDuration={1}>
+                <Skeleton height='100px' isLoaded={loaded} fadeDuration={1}>
                     <Image
                         h={'100px'}
                         src={currentPokemon?.sprites?.front_default ? currentPokemon.sprites.front_default : 'https://via.placeholder.com/150'}
                     />
                 </Skeleton>
             </Stack>
-
             <Text
                 fontSize={'sm'}
                 fontWeight={600}
@@ -31,20 +39,22 @@ const Card = ({ currentPokemon }) => {
             >
                 N°{currentPokemon?.order}
             </Text>
-            <Heading
-                py={3}
-                fontSize={'large'}
-                color="blue.900"
-                textTransform={'capitalize'}
-            >
-                {currentPokemon?.name}
-            </Heading>
+            <Skeleton isLoaded={currentPokemon?.name}>
+                <Heading
+                    py={3}
+                    fontSize={'large'}
+                    color="blue.900"
+                    textTransform={'capitalize'}
+                >
+                    {currentPokemon?.name}
+                </Heading>
+            </Skeleton>
             <Stack direction={'row'} align={'center'} justify={'center'}>
                 {currentPokemon?.types && currentPokemon?.types.map(({ type: { name } }) =>
                     <Badget key={name} type={name} />
                 )}
             </Stack>
-        </Stack>
+        </Stack >
     )
 }
 

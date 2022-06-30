@@ -12,16 +12,18 @@ const GridItemList = ({ data }) => {
         useFetch(url).then((data) => setCurrentPokemon(data))
     }, [])
 
-
     return (
         <Box
             maxW={'250px'}
             w={'full'}
             bg={'white'}
-            shadow="xl"
-            rounded={'md'}
+            shadow="md"
+            rounded={'xl'}
             overflow={'hidden'}
+            py={3}
             cursor="pointer"
+            h="260px"
+            maxHeight={'260px'}
             onClick={() => { singlePokemon?.name != name && setSinglePokemon(currentPokemon) }}
         >
             <Card currentPokemon={currentPokemon} />

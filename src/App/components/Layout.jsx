@@ -29,7 +29,9 @@ const Layout = ({ children }) => {
                         {children}
                     </Container>
                 </Box>
-
+                <Box pt={40} pb={10} textAlign="center" fontWeight={600} >
+                    by Santiagosalcedo
+                </Box>
             </Stack>
         </ChakraProvider >
     )

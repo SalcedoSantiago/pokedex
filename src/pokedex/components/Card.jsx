@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Stack, Text, Heading, Image, useColorModeValue, Skeleton } from '@chakra-ui/react';
+import { Stack, Text, Heading, Image, useColorModeValue, Skeleton, Spinner, Flex, Box, Center } from '@chakra-ui/react';
 import Badget from '../../pokemon/components/badget';
-import { debounce } from 'lodash';
+
 const Card = ({ currentPokemon }) => {
+
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
@@ -12,6 +13,14 @@ const Card = ({ currentPokemon }) => {
     }, [])
 
 
+    if (!Boolean(currentPokemon?.sprites?.front_default)) {
+        return (
+            <Flex alignItems="center" justifyContent="center" paddingY={12} h="full">
+                <Spinner color='red.500' w={10} h={10} />
+            </Flex>
+        )
+    }
+
     return (
         <Stack
             textAlign={'center'}
@@ -19,8 +28,8 @@ const Card = ({ currentPokemon }) => {
             color={useColorModeValue('gray.800', 'white')}
             align={'center'}
         >
-            <Stack>
-                <Skeleton height='100px' isLoaded={loaded} fadeDuration={1}>
+            <Stack mb={2}>
+                <Skeleton height='100px' isLoaded={loaded} fadeDuration={1} m>
                     <Image
                         h={'100px'}
                         src={currentPokemon?.sprites?.front_default ? currentPokemon.sprites.front_default : 'https://via.placeholder.com/150'}
@@ -39,16 +48,19 @@ const Card = ({ currentPokemon }) => {
             >
                 N°{currentPokemon?.order}
             </Text>
-            <Skeleton isLoaded={currentPokemon?.name}>
-                <Heading
-                    py={3}
-                    fontSize={'large'}
-                    color="blue.900"
-                    textTransform={'capitalize'}
-                >
-                    {currentPokemon?.name}
-                </Heading>
-            </Skeleton>
+
+            <Box py={3}>
+                <Skeleton isLoaded={currentPokemon?.name} h={'20px'}>
+                    <Heading
+                        fontSize={'xl'}
+                        color="blue.900"
+                        textTransform={'capitalize'}
+                    >
+                        {currentPokemon?.name ? currentPokemon.name : 'Uname'}
+                    </Heading>
+                </Skeleton>
+            </Box>
+
             <Stack direction={'row'} align={'center'} justify={'center'}>
                 {currentPokemon?.types && currentPokemon?.types.map(({ type: { name } }) =>
                     <Badget key={name} type={name} />

@@ -7,7 +7,6 @@ export const usePokedex = () => {
     const {
         state: {
             pokemonGroup,
-            Pokemones,
             singlePokemon
         },
         actions: {
@@ -20,7 +19,6 @@ export const usePokedex = () => {
         pokemonGroup,
         singlePokemon,
         setSinglePokemon,
-        Pokemones,
     }
 }
 

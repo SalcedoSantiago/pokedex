@@ -19,6 +19,7 @@ const SinglePokemon = () => {
         }
     }, [singlePokemon])
 
+
     if (!singlePokemon) {
         return (
             <Stack>

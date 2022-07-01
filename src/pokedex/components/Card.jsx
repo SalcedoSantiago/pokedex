@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Stack, Text, Heading, Image, useColorModeValue, Skeleton, Spinner, Flex, Box, Center } from '@chakra-ui/react';
+import { Stack, Text, Heading, Image, useColorModeValue, Skeleton, Spinner, Flex, Box, Icon } from '@chakra-ui/react';
 import Badget from '../../pokemon/components/badget';
+import { AddIcon } from '@chakra-ui/icons'
+import { usePokedex } from '../hooks';
+// import Hearth from '../../assets/heart-regular-24.png';
 
 const Card = ({ currentPokemon, bigImage = false }) => {
+
+    const { addPokeList, removePokList } = usePokedex();
 
     if (!Boolean(currentPokemon?.name)) {
         return (
@@ -21,7 +25,17 @@ const Card = ({ currentPokemon, bigImage = false }) => {
             p={6}
             color={useColorModeValue('gray.800', 'white')}
             align={'center'}
+            position="relative"
         >
+            <AddIcon
+                onClick={() => { addPokeList(currentPokemon) }}
+                position="absolute"
+                top={0}
+                right={0}
+                pr={3}
+                w={10}
+            />
+
             <Stack mb={2}>
                 <Skeleton
                     h={bigImage ? '170px' : '100px'}

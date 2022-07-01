@@ -7,9 +7,9 @@ const Order = ({ order, setOrder }) => {
 
     return (
         <Select defaultValue={order} cursor={'pointer'} onChange={({ target: { value } }) => { setOrder(value); }}>
-            <Box as="option" fontWeight={700} color="red.300" value='DEF' >Default</Box>
-            <Box as="option" fontWeight={700} color="red.300" value='ASC'>Asending</Box>
-            <Box as="option" fontWeight={700} color="red.300" value='DES'>Desending</Box>
+            <Box as="option" py={6} value='DEF' >Default</Box>
+            <Box as="option" py={6} value='ASC'>Asending (A-Z)</Box>
+            <Box as="option" py={6} value='DES'>Desending (Z-A)</Box>
         </Select>
     )
 }

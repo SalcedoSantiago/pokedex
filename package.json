@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@choc-ui/chakra-autocomplete": "^4.22.0",
     "@emotion/react": "^11.9.3",

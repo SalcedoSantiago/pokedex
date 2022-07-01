@@ -3,14 +3,18 @@ import { PokedexContext } from "./context";
 
 
 export const usePokedex = () => {
-
     const {
         state: {
             pokemonGroup,
-            singlePokemon
+            singlePokemon,
+            currentPage,
+            pokeList
         },
         actions: {
-            setSinglePokemon
+            setSinglePokemon,
+            setCurrentPage,
+            addPokeList,
+            removePokList
         }
     } = useContext(PokedexContext)
 
@@ -19,6 +23,11 @@ export const usePokedex = () => {
         pokemonGroup,
         singlePokemon,
         setSinglePokemon,
+        currentPage,
+        setCurrentPage,
+        pokeList,
+        addPokeList,
+        removePokList
     }
 }
 

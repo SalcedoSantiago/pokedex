@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useMemo } from "react";
 
-import { Flex, Spinner, Center } from '@chakra-ui/react';
+import { Flex, Spinner, Center, list } from '@chakra-ui/react';
 import { useFetch } from "./hooks";
 
 const PokedexContext = createContext({});
@@ -8,8 +8,9 @@ const URL = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000';
 function PokedexProvider({ children }) {
     const [pokemonGroup, setPokemonGroup] = useState([]);
     const [singlePokemon, setSinglePokemon] = useState();
-    const [loaded, setLoaded] = useState(false);
     const [count, setCount] = useState(20);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [pokeList, setPokeList] = useState([]);
 
     useEffect(() => {
         const responseData = JSON.parse(window.localStorage.getItem("pokemon"));
@@ -24,15 +25,35 @@ function PokedexProvider({ children }) {
         }
     }, [])
 
+
+    const addPokeList = (pokemon) => {
+        const exist = pokeList.filter(({ name }) => name === pokemon?.name);
+        if (Boolean(exist.length)) {
+            return;
+        }
+        setPokeList([...pokeList, pokemon])
+    }
+
+    const removePokList = () => {
+        const newPokeList = pokeList.filter(({ name }) => name !== pokemon?.name);
+        setPokeList(newPokeList)
+    }
+
+
     const value = {
         state: {
             pokemonGroup,
             singlePokemon,
-            count
+            count,
+            currentPage,
+            pokeList
         },
         actions: {
             setSinglePokemon,
-            setCount
+            setCount,
+            setCurrentPage,
+            addPokeList,
+            removePokList
         }
     }
 

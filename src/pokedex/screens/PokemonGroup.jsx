@@ -6,17 +6,11 @@ import OrderFilter from '../components/order';
 import Paginations from '../components/Paginations';
 import Search from '../components/Search';
 
-
-
-const cantPokePerPage = 20;
-
 const PokemonGroup = () => {
-    const { pokemonGroup } = usePokedex();
+    const { pokemonGroup, currentPage, setCurrentPage } = usePokedex();
     const { count } = useFilter();
-    const [page, setPage] = useState(20);
     const [search, setSearch] = useState('');
     const [order, setOrdering] = useState('DEF');
-    const [currentPage, setCurrentPage] = useState(0);
 
 
     const Pokemones = useMemo(() => {
@@ -29,7 +23,7 @@ const PokemonGroup = () => {
         }
 
     }, [pokemonGroup, count, search, order])
-    const PokemonGrid = !search ? Pokemones.slice(currentPage * 20, 20 + (20 * currentPage)) : Pokemones;
+    const PokemonGrid = Pokemones.slice(currentPage * 20, 20 + (20 * currentPage));
 
     return (
         <Box w="full">
@@ -45,7 +39,7 @@ const PokemonGroup = () => {
                 <Paginations items={Pokemones} value={{ currentPage, setCurrentPage }} />
             </Box>
             <GridList items={PokemonGrid} />
-            <Box w="100%" flex={1}>
+            <Box w="100%" flex={1} mt="4">
                 <Paginations items={Pokemones} value={{ currentPage, setCurrentPage }} />
             </Box>
         </Box >

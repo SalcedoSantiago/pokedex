@@ -6,7 +6,8 @@ export default extendTheme({
         primary: theme.colors.orange
     },
     fonts: {
-        body: `'Poppins', sans-serif`,
+        body: `'Roboto', sans-serif`,
+        heading: `'Roboto',sans-serif`
     },
     styles: {
         global: {

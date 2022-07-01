@@ -7,9 +7,7 @@ const Evolutions = ({ id }) => {
     const [evo, setEvo] = useState([]);
 
     useEffect(() => {
-        useFetch(BASE_URL + id).then((data) => {
-            console.log('data', data);
-        })
+        useFetch(BASE_URL + id).then((data) => { })
     }, [id])
 
 

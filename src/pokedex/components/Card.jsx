@@ -2,24 +2,18 @@ import { useState, useEffect } from 'react';
 import { Stack, Text, Heading, Image, useColorModeValue, Skeleton, Spinner, Flex, Box, Center } from '@chakra-ui/react';
 import Badget from '../../pokemon/components/badget';
 
-const Card = ({ currentPokemon }) => {
+const Card = ({ currentPokemon, bigImage = false }) => {
 
-    const [loaded, setLoaded] = useState(false)
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoaded(true)
-        }, 1000)
-    }, [])
-
-
-    if (!Boolean(currentPokemon?.sprites?.front_default)) {
+    if (!Boolean(currentPokemon?.name)) {
         return (
             <Flex alignItems="center" justifyContent="center" paddingY={12} h="full">
                 <Spinner color='red.500' w={10} h={10} />
             </Flex>
         )
     }
+
+    const currentImage = currentPokemon?.sprites.other['official-artwork'].front_default ? currentPokemon?.sprites.other['official-artwork'].front_default : currentPokemon.sprites.front_default;
+
 
     return (
         <Stack
@@ -29,10 +23,14 @@ const Card = ({ currentPokemon }) => {
             align={'center'}
         >
             <Stack mb={2}>
-                <Skeleton height='100px' isLoaded={loaded} fadeDuration={1} m>
+                <Skeleton
+                    h={bigImage ? '170px' : '100px'}
+                    fadeDuration={1}
+                    isLoaded={true}
+                >
                     <Image
-                        h={'100px'}
-                        src={currentPokemon?.sprites?.front_default ? currentPokemon.sprites.front_default : 'https://via.placeholder.com/150'}
+                        h={bigImage ? '170px' : '100px'}
+                        src={currentImage ? currentImage : 'https://via.placeholder.com/150'}
                     />
                 </Skeleton>
             </Stack>

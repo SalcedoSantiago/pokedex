@@ -2,10 +2,10 @@ import { Box, Button, Stack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { usePokedex } from '../hooks';
 
-const Paginations = ({ value: { currentPage, setCurrentPage } }) => {
+const Paginations = ({ value: { currentPage, setCurrentPage }, items }) => {
+    // const { pokemonGroup } = usePokedex();
 
-    const { pokemonGroup } = usePokedex();
-    const cantPages = Math.round((Boolean(pokemonGroup?.length) ? pokemonGroup.length : 0) / 20);
+    const cantPages = Math.round((Boolean(items?.length) ? items.length : 0) / 20);
     const cantPagesArray = Array.from(Array(cantPages).keys()); // array with 57 numbers 1 to 57 (maybe)
     const pages = cantPagesArray.slice(Math.max(0, currentPage - 3), currentPage + 3);
 
@@ -21,7 +21,22 @@ const Paginations = ({ value: { currentPage, setCurrentPage } }) => {
                     prev
                 </Button>
                 <Stack direction="row" >
-                    {currentPage < pages[0] &&
+                    {currentPage > 4 &&
+                        <Box
+                            bg={'white'}
+                            color={'black'}
+                            px={3}
+                            textAlign={'center'}
+                            py={1}
+                            rounded="sm"
+                            onClick={(() => { setCurrentPage(0) })}
+                            _hover={{ bg: 'purple.300', color: 'white' }}
+                            cursor="pointer"
+                        >
+                            0
+                        </Box>
+                    }
+                    {currentPage > 4 &&
                         <Box>
                             ...
                         </Box>
@@ -29,20 +44,38 @@ const Paginations = ({ value: { currentPage, setCurrentPage } }) => {
                     {pages.map((x) =>
                         <Box
                             key={x}
-                            bg={currentPage === x ? `purple.300` : 'white'}
+                            bg={currentPage === x ? `purple.500` : 'white'}
                             color={currentPage === x ? `white` : 'black'}
-                            px={2}
+                            px={3}
+                            textAlign={'center'}
                             py={1}
+                            rounded="sm"
                             onClick={(() => { setCurrentPage(x) })}
-                            cursor="pinter"
+                            _hover={{ bg: 'purple.300', color: 'white' }}
+                            cursor="pointer"
                         >
                             {x}
                         </Box>
                     )
                     }
-                    {currentPage < pages[pages.length] &&
+                    {currentPage < pages[pages.length - 1] &&
                         <Box>
                             ...
+                        </Box>
+                    }
+                    {currentPage < cantPages - 4 &&
+                        <Box
+                            bg={'white'}
+                            color={'black'}
+                            px={3}
+                            textAlign={'center'}
+                            py={1}
+                            rounded="sm"
+                            onClick={(() => { setCurrentPage(cantPages - 1) })}
+                            _hover={{ bg: 'purple.300', color: 'white' }}
+                            cursor="pointer"
+                        >
+                            {cantPages - 1}
                         </Box>
                     }
                 </Stack>
@@ -59,5 +92,6 @@ const Paginations = ({ value: { currentPage, setCurrentPage } }) => {
         </Stack>
     )
 }
+
 
 export default Paginations

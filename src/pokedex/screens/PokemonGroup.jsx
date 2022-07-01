@@ -29,15 +29,11 @@ const PokemonGroup = () => {
         }
 
     }, [pokemonGroup, count, search, order])
-
-    const PokemonGrid = Pokemones.slice(currentPage * 20, 20 + (20 * currentPage)) || Pokemones;
-
-    console.log('PokemonGrid', PokemonGrid);
-    console.log('Math.max(0 + (20 - (20 * currentPage))), 20 + (20 * currentPage)', currentPage * 20, 20 + (20 * currentPage));
+    const PokemonGrid = !search ? Pokemones.slice(currentPage * 20, 20 + (20 * currentPage)) : Pokemones;
 
     return (
         <Box w="full">
-            <Flex spacing={4} gap={4} pt={4}>
+            <Flex spacing={4} gap={4} pt={4} py={3}>
                 <Box w={"80%"}>
                     <Search value={{ search, setSearch }} />
                 </Box>
@@ -46,9 +42,12 @@ const PokemonGroup = () => {
                 </Box>
             </Flex>
             <Box w="100%" flex={1}>
-                <Paginations value={{ currentPage, setCurrentPage }} />
+                <Paginations items={Pokemones} value={{ currentPage, setCurrentPage }} />
             </Box>
             <GridList items={PokemonGrid} />
+            <Box w="100%" flex={1}>
+                <Paginations items={Pokemones} value={{ currentPage, setCurrentPage }} />
+            </Box>
         </Box >
     )
 }

@@ -1,16 +1,15 @@
 
 
-import { Select } from '@chakra-ui/react';
+import { Box, Select } from '@chakra-ui/react';
 import React from 'react'
 
 const Order = ({ order, setOrder }) => {
 
-
     return (
-        <Select defaultValue={order} cursor={'pointer'} onChange={(e) => { handleOrder(e); }}>
-            <option value='DEF' >Default</option>
-            <option value='ASC'>Asending</option>
-            <option value='DES'>Desending</option>
+        <Select defaultValue={order} cursor={'pointer'} onChange={({ target: { value } }) => { setOrder(value); }}>
+            <Box as="option" fontWeight={700} color="red.300" value='DEF' >Default</Box>
+            <Box as="option" fontWeight={700} color="red.300" value='ASC'>Asending</Box>
+            <Box as="option" fontWeight={700} color="red.300" value='DES'>Desending</Box>
         </Select>
     )
 }

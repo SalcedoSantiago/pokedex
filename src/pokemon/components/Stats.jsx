@@ -5,23 +5,28 @@ import { getStatType, getStatColor } from '../selectors'
 const Stats = ({ info }) => {
 
     return (
-        <Box py={3} px={4}>
-            <Text textAlign={'center'} fontWeight={600} mb={3}>Stats</Text>
-            <Flex gap={1} justifyContent='space-between'>
+        <Box py={3} px={5}>
+            <Text fontSize={'xl'} textTransform='uppercase' textAlign={'center'} fontWeight={900} mb={3}>Stats</Text>
+            <Flex justifyContent='space-between'>
                 {info.map(({ stat, base_stat }) =>
                     <Box key={stat.name}>
                         <Box
-                            rounded="full"
+                            rounded="md "
                             bgColor={getStatColor(stat.name)}
                             color={'white'}
-                            fontWeight={600}
+                            fontWeight={400}
                             px={2}
-                            py={2}
+                            py={1   }
                             fontSize="sm"
                         >
                             {getStatType(stat.name)}
                         </Box>
-                        <Text textAlign={'center'}>{base_stat}</Text>
+                        <Text
+                            fontWeight={600}
+                            textAlign={'center'}
+                            fontSize="sm"
+                            py={2}
+                        >{base_stat}</Text>
                     </Box>
                 )
                 }

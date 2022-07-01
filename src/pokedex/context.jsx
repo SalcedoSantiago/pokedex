@@ -22,9 +22,6 @@ function PokedexProvider({ children }) {
                 window.localStorage.setItem("pokemon", JSON.stringify(pokeData));
             })
         }
-        setTimeout(() => {
-            setLoaded(true)
-        }, 1500)
     }, [])
 
     const value = {
@@ -40,7 +37,7 @@ function PokedexProvider({ children }) {
     }
 
 
-    if (!Boolean(pokemonGroup?.length) || !loaded) {
+    if (!Boolean(pokemonGroup?.length)) {
         return (
             <Center h="100vh" w="full">
                 <Flex alignItems="center" justifyContent="center" paddingY={12}>

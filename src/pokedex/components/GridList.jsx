@@ -10,7 +10,7 @@ const GridList = ({ items }) => {
         return (
             <Box width={'100%'} h="100%" minH={'500px'}>
                 <Flex alignItems={'center'} justifyContent='center' direction={'row'} h="500px">
-                    <Text>No se encontraron resultados</Text>
+                    <Text fontWeight={600} color="gray.700">No se encontraron resultados ...</Text>
                 </Flex>
             </Box>
         )

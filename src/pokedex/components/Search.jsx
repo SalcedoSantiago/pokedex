@@ -1,9 +1,12 @@
 import { Image, Input, InputGroup, InputRightAddon } from '@chakra-ui/react'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { debounce } from 'lodash'
-
+import { CloseButton } from '@chakra-ui/react'
 
 const Search = ({ value: { setSearch } }) => {
+
+
+    const ref = useRef();
 
     const handleChange = ({ target: { value } }) => {
         setSearch(value)
@@ -22,9 +25,15 @@ const Search = ({ value: { setSearch } }) => {
 
     return (
         <InputGroup size='md' w={'full'}>
-            <Input placeholder='Search pokemon...' fontSize={'md'} padding={3} py={4} onInput={debouncedResults} />
+            <Input ref={ref} placeholder='Search pokemon...' fontSize={'md'} padding={3} py={4} onInput={debouncedResults} />
             <InputRightAddon py={3} children={
-                <Image w={19} bgColor={'white'} src="https://cdn2.iconfinder.com/data/icons/pokemon-filledoutline/64/pokeball-people-pokemon-nintendo-video-game-gaming-gartoon-ball-512.png" />
+                <>
+                    <CloseButton onClick={() => {
+                        setSearch('');
+                        ref.current.value = '';
+
+                    }} />
+                </>
             } />
         </InputGroup>
     )

@@ -4,7 +4,6 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../../theme';
 import imageLogo from '../../assets/logo.svg'
 import { usePokedex } from '../../pokedex/hooks';
-import Pokelike from '../../pokelike/screens/Pokelike';
 
 const Layout = ({ children }) => {
 
@@ -13,15 +12,15 @@ const Layout = ({ children }) => {
     return (
         <ChakraProvider theme={theme}>
             <Stack direction="column" flex={1} height="100vh" spacing={6}>
-                <Box w={'full'} paddingY={4} py={4} mt={4}>
-                    <Container maxW={"6xl"} shadow="md" rounded={'xl'}  >
-                        <Stack direction={'row'} justify="end" align={'center'} py={4} >
-                            <Image w="150px" src={imageLogo} cursor="pointer" onClick={() => {
+                <Box w={'full'} mt={4}>
+                    <Container maxW={"6xl"} rounded={'xl'}  >
+                        <Stack direction={'row'} justify="center" align={'center'} py={4} >
+                            <Image w="150px" src={imageLogo} cursor={currentPage != 0 && 'pointer'} onClick={() => {
                                 currentPage != 0 && setCurrentPage(0)
-                            }} />
-                            <Stack>
-                                <Pokelike />
-                            </Stack>
+                            }}
+                                transition={'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)'}
+                                _hover={{ transform: currentPage != 0 && 'translateY(0) scale(1.2)' }}
+                            />
                         </Stack>
                     </Container>
                 </Box>

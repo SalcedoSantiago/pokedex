@@ -24,6 +24,8 @@ const GridItemList = ({ data }) => {
             cursor="pointer"
             h="260px"
             maxHeight={'260px'}
+            transition={'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)'}
+            _hover={{ transform: 'translateY(0) scale(1.05)' }}
             onClick={() => { singlePokemon?.name != name && setSinglePokemon(currentPokemon) }}
         >
             <Card currentPokemon={currentPokemon} />

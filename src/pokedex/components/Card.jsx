@@ -1,12 +1,9 @@
 import { Stack, Text, Heading, Image, useColorModeValue, Skeleton, Spinner, Flex, Box, Icon } from '@chakra-ui/react';
 import Badget from '../../pokemon/components/badget';
-import { AddIcon } from '@chakra-ui/icons'
-import { usePokedex } from '../hooks';
-// import Hearth from '../../assets/heart-regular-24.png';
+import { useEffect } from 'react'
+import noImage from '../../assets/no-image.png'
 
 const Card = ({ currentPokemon, bigImage = false }) => {
-
-    const { addPokeList, removePokList } = usePokedex();
 
     if (!Boolean(currentPokemon?.name)) {
         return (
@@ -27,15 +24,6 @@ const Card = ({ currentPokemon, bigImage = false }) => {
             align={'center'}
             position="relative"
         >
-            <AddIcon
-                onClick={() => { addPokeList(currentPokemon) }}
-                position="absolute"
-                top={0}
-                right={0}
-                pr={3}
-                w={10}
-            />
-
             <Stack mb={2}>
                 <Skeleton
                     h={bigImage ? '170px' : '100px'}
@@ -44,7 +32,7 @@ const Card = ({ currentPokemon, bigImage = false }) => {
                 >
                     <Image
                         h={bigImage ? '170px' : '100px'}
-                        src={currentImage ? currentImage : 'https://via.placeholder.com/150'}
+                        src={currentImage ? currentImage : noImage}
                     />
                 </Skeleton>
             </Stack>
@@ -61,14 +49,15 @@ const Card = ({ currentPokemon, bigImage = false }) => {
                 N°{currentPokemon?.order}
             </Text>
 
-            <Box py={3}>
+            <Box pt={3} pb={2}>
                 <Skeleton isLoaded={currentPokemon?.name} h={'20px'}>
                     <Heading
                         fontSize={'xl'}
                         color="blue.900"
                         textTransform={'capitalize'}
+                        lineHeight={1}
                     >
-                        {currentPokemon?.name ? currentPokemon.name : 'Uname'}
+                        {currentPokemon?.name ? currentPokemon.name.split('-').join(' ') : 'Uname'}
                     </Heading>
                 </Skeleton>
             </Box>

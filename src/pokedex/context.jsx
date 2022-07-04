@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect, useMemo } from "react";
-
-import { Flex, Spinner, Center, list } from '@chakra-ui/react';
+import { createContext, useState, useEffect } from "react";
+import pokeball_gray from '../assets/pokeball_gray.png'
+import { Flex, Spinner, Center, Image, Box } from '@chakra-ui/react';
 import { useFetch } from "./hooks";
 
 const PokedexContext = createContext({});
@@ -10,7 +10,7 @@ function PokedexProvider({ children }) {
     const [singlePokemon, setSinglePokemon] = useState();
     const [count, setCount] = useState(20);
     const [currentPage, setCurrentPage] = useState(0);
-    const [pokeList, setPokeList] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         const responseData = JSON.parse(window.localStorage.getItem("pokemon"));
@@ -23,22 +23,12 @@ function PokedexProvider({ children }) {
                 window.localStorage.setItem("pokemon", JSON.stringify(pokeData));
             })
         }
+
+        setTimeout(() => {
+            setLoaded(true)
+        }, 1000)
+
     }, [])
-
-
-    const addPokeList = (pokemon) => {
-        const exist = pokeList.filter(({ name }) => name === pokemon?.name);
-        if (Boolean(exist.length)) {
-            return;
-        }
-        setPokeList([...pokeList, pokemon])
-    }
-
-    const removePokList = () => {
-        const newPokeList = pokeList.filter(({ name }) => name !== pokemon?.name);
-        setPokeList(newPokeList)
-    }
-
 
     const value = {
         state: {
@@ -46,23 +36,19 @@ function PokedexProvider({ children }) {
             singlePokemon,
             count,
             currentPage,
-            pokeList
         },
         actions: {
             setSinglePokemon,
             setCount,
             setCurrentPage,
-            addPokeList,
-            removePokList
         }
     }
 
-
-    if (!Boolean(pokemonGroup?.length)) {
+    if (!loaded || !Boolean(pokemonGroup?.length)) {
         return (
             <Center h="100vh" w="full">
                 <Flex alignItems="center" justifyContent="center" paddingY={12}>
-                    <Spinner color='red.500' w={10} h={10} />
+                    <Box backgroundImage={`url(${pokeball_gray})`} w={'100px'} h="100px" className="rotating" />
                 </Flex>
             </Center>
         )

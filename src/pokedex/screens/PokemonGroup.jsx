@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import GridList from '../components/GridList';
 import { usePokedex, useFilter } from '../hooks';
-import { Box, Button, Flex, Input, InputGroup, InputRightAddon, Select, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import OrderFilter from '../components/order';
 import Paginations from '../components/Paginations';
 import Search from '../components/Search';
@@ -15,7 +15,7 @@ const PokemonGroup = () => {
 
     const Pokemones = useMemo(() => {
         const init = pokemonGroup.slice(0, count);
-        const pokeFilter = pokemonGroup.filter(({ name }) => name.toLowerCase().includes(search.toLowerCase())) || init;
+        const pokeFilter = pokemonGroup.filter(({ name }) => name.split('-').join(' ').toLowerCase().includes(search.toLowerCase())) || init;
         if (order == 'ASC' || order == 'DES') {
             return [...pokeFilter].sort((a, b) => order == 'ASC' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))
         } else {

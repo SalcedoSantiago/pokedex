@@ -8,13 +8,10 @@ export const usePokedex = () => {
             pokemonGroup,
             singlePokemon,
             currentPage,
-            pokeList
         },
         actions: {
             setSinglePokemon,
             setCurrentPage,
-            addPokeList,
-            removePokList
         }
     } = useContext(PokedexContext)
 
@@ -25,9 +22,6 @@ export const usePokedex = () => {
         setSinglePokemon,
         currentPage,
         setCurrentPage,
-        pokeList,
-        addPokeList,
-        removePokList
     }
 }
 

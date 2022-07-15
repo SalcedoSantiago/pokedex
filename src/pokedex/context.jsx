@@ -4,7 +4,7 @@ import { Flex, Spinner, Center, Image, Box } from '@chakra-ui/react';
 import { useFetch } from "./hooks";
 
 const PokedexContext = createContext({});
-const URL = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000';
+const URL = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=950';
 function PokedexProvider({ children }) {
     const [pokemonGroup, setPokemonGroup] = useState([]);
     const [singlePokemon, setSinglePokemon] = useState();

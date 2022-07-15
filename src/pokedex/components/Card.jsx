@@ -50,7 +50,7 @@ const Card = ({ currentPokemon, bigImage = false }) => {
             </Text>
 
             <Box pt={3} pb={2}>
-                <Skeleton isLoaded={currentPokemon?.name} h={'20px'}>
+                <Skeleton isLoaded={currentPokemon?.name} >
                     <Heading
                         fontSize={'xl'}
                         color="blue.900"

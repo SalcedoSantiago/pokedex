@@ -25,7 +25,7 @@ const SinglePokemon = () => {
 
     if (!singlePokemon) {
         return (
-            <Box position={'sticky'} top={5} py={3} px={5} shadow="md" rounded={"xl"} h="750px" >
+            <Box position={'sticky'} top={5} py={3} px={5} shadow="md" rounded={"xl"} h="750px" bgColor="white">
                 <Stack h="100%" justifyContent={'center'} >
                     <Text fontFamily={"VT323"} fontSize="xl" px={2} mb={5}>
                         Hola a todos, Bienevenido a Pokedex, elije cualquier pokemon que
@@ -40,7 +40,7 @@ const SinglePokemon = () => {
     }
 
     return (
-        <Box position={'sticky'} top={5} py={3} pb={6} px={5} shadow="md" rounded={"xl"}>
+        <Box position={'sticky'} top={5} py={3} pb={6} px={5} shadow="md" rounded={"xl"} bgColor="white">
             <Card currentPokemon={singlePokemon} bigImage={true} />
             <Text textAlign={'center'} fontSize="md" fontWeight={500}>
                 {desc}

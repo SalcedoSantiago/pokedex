@@ -24,8 +24,8 @@ const Search = ({ value: { setSearch } }) => {
 
 
     return (
-        <InputGroup size='md' w={'full'}>
-            <Input ref={ref} placeholder='Search pokemon...' fontSize={'md'} padding={3} py={4} onInput={debouncedResults} />
+        <InputGroup size='md' w={'full'} >
+            <Input ref={ref} placeholder='Search pokemon...' fontSize={'md'} padding={3} py={4} onInput={debouncedResults} bgColor="white" fontWeight={500} />
             <InputRightAddon py={3} children={
                 <>
                     <CloseButton onClick={() => {
